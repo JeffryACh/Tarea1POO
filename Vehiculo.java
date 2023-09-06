@@ -2,14 +2,16 @@ package Tarea1Arraylist;
 
 public class Vehiculo {
     private String placa;
-    private String tipo;
+    private final String[] TIPO = {"Carro", "Moto", "Camion", "Bicicleta", "Otros"};
     private int espacios;
     private double horas;
+    private String tipo;
 
-    public Vehiculo(String placa, String tipo, int espacios) {
+    public Vehiculo(String placa, int pTipo, int espacios, double horas) {
         this.placa = placa;
-        this.tipo = tipo;
         this.espacios = espacios;
+        this.tipo = TIPO[pTipo];
+        this.horas = horas;
     }
 
     @Override

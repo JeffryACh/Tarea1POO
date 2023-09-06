@@ -7,6 +7,7 @@ public class Parqueo {
      * clase Parqueo
      * 
      */
+    private final int[] PRECIOS = {1500, 800, 2500, 500, 2000};
     private ArrayList<Vehiculo> parqueo; // Lista de vehiculos en el parqueo
     private int espacios; // Espacios ocupados en el parqueo
 
