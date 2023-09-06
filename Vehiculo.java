@@ -6,12 +6,14 @@ public class Vehiculo {
     private int espacios;
     private double horas;
     private String tipo;
+    protected int numTipo;
 
     public Vehiculo(String placa, int pTipo, int espacios, double horas) {
         this.placa = placa;
         this.espacios = espacios;
         this.tipo = TIPO[pTipo];
         this.horas = horas;
+        this.numTipo = pTipo;
     }
 
     @Override
@@ -49,5 +51,9 @@ public class Vehiculo {
 
     public void setHoras(double horas) {
         this.horas = horas;
+    }
+
+    public int getNumTipo() {
+        return numTipo;
     }
 }

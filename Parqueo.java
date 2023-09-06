@@ -7,7 +7,7 @@ public class Parqueo {
      * clase Parqueo
      * 
      */
-    private final int[] PRECIOS = {1500, 800, 2500, 500, 2000};
+    private int[] precios = {1500, 800, 2500, 500, 2000};
     private ArrayList<Vehiculo> parqueo; // Lista de vehiculos en el parqueo
     private int espacios; // Espacios ocupados en el parqueo
 
@@ -24,11 +24,9 @@ public class Parqueo {
     */
     @Override
     public String toString() {
-        int acum = 0;
         String str = "";
         for (int i = 0; i < parqueo.size(); i++) {
-            acum += parqueo.get(i).getEspacios();
-            str += parqueo.get(i) + "\t" + acum +"\n";
+            str += parqueo.get(i) +"\n";
         }
         return str;
     }
@@ -36,12 +34,8 @@ public class Parqueo {
     
     
     public boolean addVehiculo(Vehiculo vehiculo){
-        if (getEspacios() + vehiculo.getEspacios()  <= MAXIMO){
-            parqueo.add(vehiculo);
-            this.espacios += vehiculo.getEspacios();
-            return true;
-        }
-        return false;
+        parqueo.add(vehiculo);
+        return true;
     }
     
     public Vehiculo buscarPorPlaca(String placa){
@@ -70,29 +64,9 @@ public class Parqueo {
         }
         return 0;
     }
-    
-    public double calcularMontoDiario(){
-        return getEspaciosActivos() * MONTO_HORA;
-    }
-    
-    private int getEspacios(){
-        int res = 0;
-        for (int i = 0; i < parqueo.size(); i++) {
-            res += parqueo.get(i).getEspacios();
-        }
-        return res;
-    }
-    
-    private double getEspaciosActivos(){
-        double res = 0;
-        for (int i = 0; i < parqueo.size(); i++) {
-            res += parqueo.get(i).getHoras() * parqueo.get(i).getEspacios();
-        }
-        return res;
-    }
 
     private double montoPorVehiculo(Vehiculo v){
-        return v.getHoras() * v.getEspacios() * MONTO_HORA;
+        return v.getHoras() * precios[v.getNumTipo()];
     }
     
     public void print(){
@@ -101,5 +75,23 @@ public class Parqueo {
             v = parqueo.get(i);
             System.out.println(v.getTipo() + " " + v.getPlaca() + "\t" + "Horas: " + v.getHoras() + montoPorVehiculo(v));
         }
+    }
+
+    private int actualizarDescuentoBool(int pTipo, int pDescuento){
+        for (int i = 0; i < parqueo.size(); i++) {
+            if(parqueo.get(i).getTipo().equals(pTipo)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public double sumarHoras(String pPlaca, double pHoras){
+        Vehiculo v = buscarPorPlaca(pPlaca);
+        if(v != null){
+            v.setHoras(v.getHoras() + pHoras);
+            return v.getHoras();
+        }
+        return 0;
     }
 }

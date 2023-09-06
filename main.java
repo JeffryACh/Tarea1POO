@@ -22,6 +22,14 @@ public class main {
         Parqueo p = new Parqueo();
         Vehiculo v1;
         v1 = new Vehiculo("514513", elegirVahiculo(1), 1, 10);
-        System.out.println(v1);
+        //System.out.println(v1);
+        Vehiculo v2= new Vehiculo("AFGHJ2",elegirVahiculo(5),4,3);
+        p.addVehiculo(v2);
+        p.addVehiculo(v1);
+        System.out.println(p.toString());
+        System.out.println("---------------------");
+        p.removeVehiculo("514513");
+        p.addHoras("AFGHJ2",2.3);
+        System.out.println(p.toString());
     }
 }
