@@ -10,6 +10,7 @@ public class Parqueo {
     private int[] precios = {1500, 800, 2500, 500, 2000};
     private ArrayList<Vehiculo> parqueo; // Lista de vehiculos en el parqueo
     private int espacios; // Espacios ocupados en el parqueo
+    private boolean descuentosApli= false; 
 
     public Parqueo() {
         parqueo = new ArrayList<Vehiculo>();
@@ -24,6 +25,14 @@ public class Parqueo {
     */
     @Override
     public String toString() {
+        String str = "";
+        for (int i = 0; i < parqueo.size(); i++) {
+            str += parqueo.get(i) +"\n";
+        }
+        return str;
+    }
+
+    public String toString2() {
         String str = "";
         for (int i = 0; i < parqueo.size(); i++) {
             str += parqueo.get(i) +"\n";
@@ -73,17 +82,31 @@ public class Parqueo {
         Vehiculo v;
         for (int i = 0; i < parqueo.size(); i++) {
             v = parqueo.get(i);
-            System.out.println(v.getTipo() + " " + v.getPlaca() + "\t" + "Horas: " + v.getHoras() + montoPorVehiculo(v));
+            System.out.println(v.getTipo() + " " + v.getPlaca() + "\t" + "Horas: " + v.getHoras() +
+             montoPorVehiculo(v)+parqueo.getDescuentoApli());
         }
     }
 
-    private int actualizarDescuentoBool(int pTipo, int pDescuento){
+    int actualizarDescuentoBool(int pTipo, int pDescuento){
         for (int i = 0; i < parqueo.size(); i++) {
             if(parqueo.get(i).getTipo().equals(pTipo)){
+                parqueo.setDescuentoApli(true);
                 return true;
             }
         }
         return false;
+    }
+    /*Lo que tengo de idea para poder hacer el print, es poner un parametro mas,
+     * que indique si se le hizo descuento(true) o si no se le hizo(false); No tiene que imprimirlo
+     * pero se lo podemos añadir al final despues de monto, y que al correr el parqueo lo que tienen true
+     * tiren el mensaje de descuento y los que tienen false el mensaje sin descuento.
+     * Pero no se si meterle ese parametro a vehiculo o a parqueo.
+     */
+    private getDescuentoApli(){
+        return descuentosApli;
+    }
+    private setDescuentoApli(boolean validado){
+        this.descuentosApli=validado;
     }
 
     public double sumarHoras(String pPlaca, double pHoras){

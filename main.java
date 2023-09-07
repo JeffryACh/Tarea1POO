@@ -18,6 +18,9 @@ public class main {
                 return -1;
         }
     }
+    /**
+     * @param args
+     */
     public static void main(String[] args) {        
         Parqueo p = new Parqueo();
         Vehiculo v1;
@@ -30,6 +33,7 @@ public class main {
         System.out.println("---------------------");
         p.removeVehiculo("514513");
         p.addHoras("AFGHJ2",2.3);
-        System.out.println(p.toString());
+        p.actualizarDescuentoBool(5,10);
+        System.out.println(p.toString2());
     }
 }
